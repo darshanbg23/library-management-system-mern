@@ -26,7 +26,7 @@ app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 
 // Connect to MongoDB and start server
 connectDB().then(() => {
-  app.listen(PORT, () => {
+  app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
   });
 });
