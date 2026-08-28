@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const API_URL = 'http://localhost:5000/api/books'
+const API_URL = import.meta.env.VITE_API_URL
 
 function Books() {
   const [books, setBooks] = useState([])
@@ -22,7 +22,7 @@ function Books() {
   const fetchBooks = async () => {
     try {
       setLoading(true)
-      const res = await fetch(API_URL)
+      const res = await fetch(`${API_URL}/books`)
       const data = await res.json()
       setBooks(data)
       setError('')
@@ -101,7 +101,7 @@ function Books() {
     try {
       if (editingBook) {
         // Update book
-        const res = await fetch(`${API_URL}/${editingBook._id}`, {
+        const res = await fetch(`${API_URL}/books/${editingBook._id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -120,7 +120,7 @@ function Books() {
         setSuccess('Book updated successfully.')
       } else {
         // Add book
-        const res = await fetch(API_URL, {
+        const res = await fetch(`${API_URL}/books`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -155,7 +155,7 @@ function Books() {
     try {
       setError('')
       setSuccess('')
-      const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' })
+      const res = await fetch(`${API_URL}/books/${id}`, { method: 'DELETE' })
       if (!res.ok) {
         const data = await res.json()
         setError(data.message || 'Book could not be deleted.')

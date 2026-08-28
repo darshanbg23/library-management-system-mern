@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const API_URL = 'http://localhost:5000/api/dashboard'
+const API_URL = import.meta.env.VITE_API_URL
 
 function Dashboard() {
   const [data, setData] = useState(null)
@@ -10,7 +10,7 @@ function Dashboard() {
   const fetchDashboard = async () => {
     try {
       setLoading(true)
-      const res = await fetch(API_URL)
+      const res = await fetch(`${API_URL}/dashboard`)
       const result = await res.json()
       setData(result)
       setError('')

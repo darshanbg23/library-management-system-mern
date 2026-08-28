@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const API_URL = 'http://localhost:5000/api/students'
+const API_URL = import.meta.env.VITE_API_URL
 
 function Students() {
   const [students, setStudents] = useState([])
@@ -21,7 +21,7 @@ function Students() {
   const fetchStudents = async () => {
     try {
       setLoading(true)
-      const res = await fetch(API_URL)
+      const res = await fetch(`${API_URL}/students`)
       const data = await res.json()
       setStudents(data)
       setError('')
@@ -94,7 +94,7 @@ function Students() {
     try {
       if (editingStudent) {
         // Update student
-        const res = await fetch(`${API_URL}/${editingStudent._id}`, {
+        const res = await fetch(`${API_URL}/students/${editingStudent._id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
@@ -107,7 +107,7 @@ function Students() {
         setSuccess('Student updated successfully.')
       } else {
         // Add student
-        const res = await fetch(API_URL, {
+        const res = await fetch(`${API_URL}/students`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
@@ -136,7 +136,7 @@ function Students() {
     try {
       setError('')
       setSuccess('')
-      const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' })
+      const res = await fetch(`${API_URL}/students/${id}`, { method: 'DELETE' })
       if (!res.ok) {
         const data = await res.json()
         setError(data.message || 'Student could not be deleted.')
