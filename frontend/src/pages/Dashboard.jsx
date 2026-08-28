@@ -31,22 +31,27 @@ function Dashboard() {
   return (
     <div>
       <h2>Dashboard</h2>
+      <p className="page-subtitle">Overview of your library</p>
       <div className="dashboard-cards">
         <div className="card">
           <h3>Total Books</h3>
           <p className="card-number">{data.totalBooks}</p>
+          <p className="card-desc">All books in library</p>
         </div>
         <div className="card">
           <h3>Total Students</h3>
           <p className="card-number">{data.totalStudents}</p>
+          <p className="card-desc">Registered students</p>
         </div>
         <div className="card">
           <h3>Available Books</h3>
           <p className="card-number">{data.availableBooks}</p>
+          <p className="card-desc">Copies available to issue</p>
         </div>
         <div className="card">
           <h3>Issued Books</h3>
           <p className="card-number">{data.issuedBooks}</p>
+          <p className="card-desc">Currently issued</p>
         </div>
       </div>
     </div>

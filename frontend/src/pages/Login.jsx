@@ -30,7 +30,8 @@ function Login() {
   return (
     <div className="login-page">
       <div className="login-container">
-        <h1>Library Management System</h1>
+        <h1>Library System</h1>
+        <p className="login-subtitle">Sign In To Continue</p>
         {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">

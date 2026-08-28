@@ -171,7 +171,10 @@ function Books() {
   return (
     <div>
       <div className="page-header">
-        <h2>Books</h2>
+        <div>
+          <h2>Books</h2>
+          <p className="page-subtitle">Manage books in the library</p>
+        </div>
         <div className="page-actions">
           <input
             type="text"

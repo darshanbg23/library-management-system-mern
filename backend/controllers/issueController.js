@@ -8,7 +8,19 @@ const getIssues = async (req, res) => {
     const issues = await Issue.find()
       .populate('book', 'title author')
       .populate('student', 'name email');
-    res.json(issues);
+
+    const validIssues = issues.filter(issue => issue.student !== null && issue.book !== null);
+
+    const orphanedIds = issues
+      .filter(issue => issue.student === null || issue.book === null)
+      .map(issue => issue._id);
+    if (orphanedIds.length > 0) {
+      Issue.deleteMany({ _id: { $in: orphanedIds } }).catch(err =>
+        console.error('Failed to clean up orphaned issue records:', err)
+      );
+    }
+
+    res.json(validIssues);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }

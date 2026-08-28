@@ -108,6 +108,7 @@ function IssueReturn() {
   return (
     <div>
       <h2>Issue / Return</h2>
+      <p className="page-subtitle">Issue and return books</p>
 
       {error && <p className="message error-message">{error}</p>}
       {success && <p className="message success-message">{success}</p>}
@@ -145,7 +146,7 @@ function IssueReturn() {
         <button className="btn btn-primary" onClick={handleIssue}>Issue Book</button>
       </div>
 
-      <h3 style={{ marginTop: '30px' }}>Issued Books</h3>
+      <h3 className="section-heading">Issue Records</h3>
       <table className="data-table">
         <thead>
           <tr>
@@ -169,7 +170,7 @@ function IssueReturn() {
                 <td>{issue.book?.title || 'Unknown'}</td>
                 <td>{formatDate(issue.issueDate)}</td>
                 <td>{formatDate(issue.returnDate)}</td>
-                <td>{issue.status}</td>
+                <td><span className={`badge ${issue.status === 'Issued' ? 'badge-issued' : 'badge-returned'}`}>{issue.status}</span></td>
                 <td>
                   {issue.status === 'Issued' ? (
                     <button className="btn btn-success btn-sm" onClick={() => handleReturn(issue._id)}>Return</button>

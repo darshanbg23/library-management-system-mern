@@ -152,7 +152,10 @@ function Students() {
   return (
     <div>
       <div className="page-header">
-        <h2>Students</h2>
+        <div>
+          <h2>Students</h2>
+          <p className="page-subtitle">Manage registered students</p>
+        </div>
         <div className="page-actions">
           <input
             type="text"
